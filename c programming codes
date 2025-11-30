@@ -1,0 +1,51 @@
+Simulate a PWM signal with varying duty cycle for given input duty percentage. Input → duty %; Output → print or toggle state for time slices.( In C programming)
+
+#include <stdio.h>
+
+void simulate_pwm(int duty, int slices)
+{
+    int high = (duty * slices) / 100;
+    for(int i = 0; i < slices; i++)
+    {
+        if(i < high)
+            printf("1");
+        else
+            printf("0");
+    }
+    printf("\n");
+}
+
+int main()
+{
+    simulate_pwm(40, 20);
+    simulate_pwm(75, 20);
+    return 0;
+}
+
+Embedded C code for a microcontroller to read a temperature sensor and send alert LED ON if temp > threshold. Input → sensor value; Output → LED ON/OFF.
+
+  #include <stdint.h>
+
+#define THRESHOLD 30
+#define LED_ON    1
+#define LED_OFF   0
+
+uint16_t read_temperature_sensor(void);
+void set_led(uint8_t state);
+
+int main(void)
+{
+    uint16_t temp;
+
+    while(1)
+    {
+        temp = read_temperature_sensor();
+
+        if(temp > THRESHOLD)
+            set_led(LED_ON);
+        else
+            set_led(LED_OFF);
+    }
+
+    return 0;
+}
