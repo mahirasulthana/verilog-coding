@@ -1,0 +1,23 @@
+Embedded C LED Blink with Variable Speed
+
+#include <stdint.h>
+
+volatile uint32_t speed = 300;
+
+void delay_ms(uint32_t d) {
+    for(uint32_t i=0; i<d*1000; i++);
+}
+
+uint32_t get_speed() {
+    return speed;
+}
+
+int main() {
+    volatile uint8_t *led = (uint8_t *)0x50000000;
+    *led = 0;
+
+    while(1) {
+        *led ^= 1;
+        delay_ms(get_speed());
+    }
+}
